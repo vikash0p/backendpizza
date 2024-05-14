@@ -63,7 +63,7 @@ export const login = async (req, res) => {
         }
         const token = jwt.sign({ id: existUser._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
         console.log("🚀 ~ file: userController.js:65 ~ token:", token);
-        res.cookie("token", token, { httpOnly: true, path: "/", expires: new Date(Date.now() + 1000*60*60*2) });
+        res.cookie("token", token, { httpOnly: false,secure:true , expires: new Date(Date.now() + 1000*60*60*2) });
         if (!token) res.status(400).json({ message: "InValid token", success: false });
         res.status(201).json({ message: "Login successfully", success: true, existUser, token });
 
