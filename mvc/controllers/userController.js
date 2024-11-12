@@ -75,6 +75,7 @@ export const login = async (req, res) => {
         // Set token in cookie with secure options
         res.cookie("token", token, {
             httpOnly: true,
+            sameSite: "none",
             secure: process.env.NODE_ENV === "production",
             expires: new Date(Date.now() + 1000 * 60 * 60 * 2), // 2 hours
         });
@@ -89,6 +90,7 @@ export const login = async (req, res) => {
 // Middleware to verify JWT token
 export const verifyToken = (req, res, next) => {
     const token = req.cookies.token;
+    console.log("🚀 ~ file: userController.js:92 ~ token:", token);
 
     if (!token) {
         return res.status(401).json({ message: "No token provided", success: false });
