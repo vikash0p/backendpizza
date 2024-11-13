@@ -29,7 +29,7 @@ export const getPizzaById = async (req, res) => {
     try {
 
         const pizza = await Pizza.findById(id);
-        if(!pizza){
+        if (!pizza) {
             return res.status(404).json({ message: "failed to fetch pizza", success: false, error: error.message })
 
         }
